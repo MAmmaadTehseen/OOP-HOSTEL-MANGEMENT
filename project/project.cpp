@@ -21,10 +21,22 @@ class info
 {
 	protected:
 		int id;
-		string firstname="ammad",sname="khan ",e_mail="ammadtehseen@gmail.com " ,department="it" ,phone="03046249904 " ;
-		string pass="gcs";
-		long payment=0;
+		string firstname,sname,e_mail ,department,phone ;
+		string pass;
+		long payment;
+	
 	public:
+		info()
+		{
+		payment=0;
+		firstname="ammad";
+		sname="khan";
+			
+		pass="gcs";
+		phone="03046249904 "; 
+		department="it" ;
+		e_mail="ammadtehseen@gmail.com ";
+		}
 		
 		//getter of pay To get pay
 		int getpay()   
@@ -37,7 +49,6 @@ class info
 		void setinfoc()  
 		{
 			
-			system("Color 6");
 			cout<<"Enter firstname:";
 			cin.ignore();
 			getline(cin,firstname);
@@ -57,7 +68,6 @@ class info
 	//to chnage password
     	void change_pass()  
 	{
-		 system("Color 2");
 		 string p ;
 		 password:
 		 cout<<"Enter old password:";
@@ -88,7 +98,6 @@ class info
 		}
 		else
 		{
-			system("Color 4");
 			cout<<"!!!!!!!!!!!invalid password!!!!!!!!";
 			goto password;
 		}
@@ -96,7 +105,6 @@ class info
      //login function 
      int login()
 	{
-		system("Color 0B");
 		string p ;
 		int a;
 		
@@ -125,7 +133,6 @@ class info
 	//function to add payment
      	void add_payment()
 		{
-			system("Color 0F");
 			long p;
 			cout<<"Enter payment to add:"<<endl;
 			cin>>p;
@@ -134,7 +141,6 @@ class info
 		//function to subtract payment
 	void sub_payment()
 		{
-			system("Color 0D");
 			long p;
 			cout<<"Enter payment to subtract:"<<endl;
 			cin>>p;
@@ -175,6 +181,7 @@ class student:public info
 		{
 			//unique id is provided to every student
 			id=a++;
+			room="00";
 		
 		}
 		//destructor 
@@ -202,14 +209,14 @@ class student:public info
 		//to show info of students
 		void getinfo ()  
 		{
-			system("Color 3");
+
 			cout<<"ID:"<<id<<endl<<"Name:"<<firstname<<" "<<sname<<endl<<"Payment:"<<payment<<endl;
 			cout<<"E-mail:"<<e_mail<<endl<<"Mobile no:"<<phone<<endl<<"Department:"<<department<<endl<<"room:"<<room<<endl;
 			
 		}
 	protected:
 	public:	
-	string room="00";	
+	string room;	
 
 	
 	
@@ -247,7 +254,6 @@ class staff:public info
 		//to show info 
 		void getinfo()  
 		{
-			system("Color 1");
 			cout<<"ID:"<<id<<endl<<"Name:"<<firstname<<" "<<sname<<endl<<"Payment:"<<payment<<endl;
 			cout<<"E-mail:"<<e_mail<<endl<<"Mobile no:"<<phone<<endl<<"job:"<<department<<endl;
 			
@@ -304,12 +310,61 @@ class clerk:public student,public staff,public mess
 {
 	
 	private:
-		int ID=1;
-		string pass="ammad1";
+		
+		string pass;
 	
 	protected:
 	
 	public:
+		clerk()
+		{
+			pass="ammad1";
+			ifstream file("clerk.txt");
+			file>>pass;
+		}
+		~clerk()
+		{
+			ofstream file("clerk.txt");
+			file<<pass<<endl;
+		}
+			//to chnage password
+    	void change_pass()  
+	{
+		 string p ;
+		 password:
+		 cout<<"Enter old password:";
+		 cin>>p;
+	
+		string a ;
+		string b ;
+		if(!p.compare(pass))
+		{
+			ab:
+			
+			cout<<"Enter new password:";
+			cin.ignore();
+			getline(cin,a );
+			cout<<"Confirm your password:";
+			getline(cin,b );
+			if(!a.compare(b))
+			{
+			pass=a;
+			cout<<"***Password changed***"<<endl;
+		    }
+		    else
+		    {
+		    	cout<<"***password missmatch***";
+		    	goto ab;
+			}
+		
+		}
+		else
+		{
+			cout<<"!!!!!!!!!!!invalid password!!!!!!!!";
+			goto password;
+		}
+     }
+
 		//setroom function is used to sewt room no to student
 		void setroom(student s)
 		{
@@ -319,6 +374,7 @@ class clerk:public student,public staff,public mess
 		//login function for staff
 	int login()
 	{
+		
 		string p ;
 		int a;
 		
@@ -334,7 +390,6 @@ class clerk:public student,public staff,public mess
 		}
 		else
 		{
-			system("Color 9");
 			char temp1;
 			cout<<"!!!!invalid pass!!!!"<<endl;
 			cout<<"press 'y' to enter password again or any other alphabet to goto main menu."<<endl;
@@ -354,10 +409,59 @@ class suprident:public clerk
 
 {
 	protected:
-		int ID=0;
 		
-		string pass="ammad0" ;	
+		
+		string pass ;	
 	public:
+			suprident()
+		{
+			pass="ammad1";
+			ifstream file("superident.txt");
+			file>>pass;
+		}
+		~suprident()
+		{
+			ofstream file("superident.txt");
+			file<<pass<<endl;
+		}
+			//to chnage password
+    	void change_pass()  
+	{
+		 string p ;
+		 password:
+		 cout<<"Enter old password:";
+		 cin>>p;
+	
+		string a ;
+		string b ;
+		if(!p.compare(pass))
+		{
+			ab:
+			
+			cout<<"Enter new password:";
+			cin.ignore();
+			getline(cin,a );
+			cout<<"Confirm your password:";
+			getline(cin,b );
+			if(!a.compare(b))
+			{
+			pass=a;
+			cout<<"***Password changed***"<<endl;
+		    }
+		    else
+		    {
+		    	cout<<"***password missmatch***";
+		    	goto ab;
+			}
+		
+		}
+		else
+		{
+			cout<<"!!!!!!!!!!!invalid password!!!!!!!!";
+			goto password;
+		}
+     }
+
 	//login function for superident	
 	int login()
 	{
@@ -597,7 +701,7 @@ int main()
 		if(clk.login())
 		{
 			clerk:
-		cout<<"1.Manage  student"<<endl<<"2.Manage  staff"<<endl<<"3.Allote room no to students"<<endl<<"4.Manage mess"<<endl<<"0.Main Menu"<<endl;
+		cout<<"1.Manage  student"<<endl<<"2.Manage  staff"<<endl<<"3.Allote room no to students"<<endl<<"4.Manage mess"<<endl<<"5.Change your password"<<"0.Main Menu"<<endl;
 		cin>>temp1;
 		system("cls");
 		if(temp1=='1')//to mnage students
@@ -642,6 +746,10 @@ int main()
 			{
 			s[id].setinfoc();	
 			}
+		}
+		else if(temp1=='5')
+		{
+			clk.change_pass();
 		}
 		else if(temp1=='2')//to mange staff
 		{
@@ -732,7 +840,7 @@ int main()
 		{
 			sup:
 			int id;
-			cout<<"1.See details of student"<<endl<<"2.See details of staff "<<endl<<"3.Main Menu"<<endl;
+			cout<<"1.See details of student"<<endl<<"2.See details of staff "<<endl<<"3.change your password"<<endl<<"0.MainMenu"<<endl;
 			cin>>temp1;
 			system("cls");
 			if(temp1=='1')//see deatails of students
@@ -763,9 +871,13 @@ int main()
 				getch();
 				system("cls");
 			}
-			else if(temp1=='3')
+			else if(temp1=='0')
 			{
 				goto mainmenu;
+			}
+			else if(temp1=='3')
+			{
+				sup.change_pass();
 			}
 			else
 			{
@@ -852,12 +964,13 @@ int main()
 		goto b;
 	}
 	exit:
-		cout<<"_____________________________________________________________________________________________"<<endl;
-		cout<<"|          !----!                                                                           |"<<endl;
-		cout<<"|          !    !                                                                           |"<<endl;
-		cout<<"|          !----!                                                                           |"<<endl;
-		cout<<"|          !    !                                                                           |"<<endl;
-		cout<<"_____________________________________________________________________________________________"<<endl;
+		cout<<"                     _______________________________________"<<endl;
+		cout<<"                    |     ___            ____               |"<<endl;
+		cout<<"                    |    |    |  \\   /  |                   |"<<endl;
+		cout<<"                    |    |____|   \\ /   |____               |"<<endl;
+		cout<<"                    |    |    |    /    |                   |"<<endl;
+		cout<<"                    |    |____|   /     |____               |"<<endl;
+		cout<<"                    |_______________________________________|"<<endl;
 
 
 
