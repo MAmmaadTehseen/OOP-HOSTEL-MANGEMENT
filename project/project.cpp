@@ -1,7 +1,7 @@
 // hostel managment project 
 //559
 //045276
-//3rd semester
+
 //OOP
 
 #include<iostream>
